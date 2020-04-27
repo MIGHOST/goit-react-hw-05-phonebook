@@ -1,0 +1,26 @@
+.button {
+    border: 1px solid grey;
+    padding: 5px 0;
+    width: 340px;
+    border-radius: 2px;
+    outline: none;
+    color: white;
+    background-color:rgba(57, 90, 156);
+}
+
+.disabled {
+    composes: button;
+    color: black;
+    background-color: rgb(255, 255, 255);
+}
+
+
+.active {
+    composes: button;
+}
+
+.active:hover {
+    background-color:rgb(38, 71, 138);
+    color: rgb(255, 255, 255);
+
+}

@@ -1,0 +1,19 @@
+.logo {
+  animation: logo-wake 500ms linear;
+  color:rgba(57, 90, 156);
+}
+
+@keyframes logo-wake {
+  0% {
+      transform: translateX(-200px);
+  }
+
+  100% {
+      transform: translateX(0);
+  }
+}
+
+.text{
+  color:rgba(57, 90, 156);
+}
+
