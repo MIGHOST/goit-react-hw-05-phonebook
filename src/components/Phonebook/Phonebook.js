@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { save, get } from '../../helpers/editLocalStorage';
 import styles from './Phonebook.module.css';
 import { CSSTransition } from 'react-transition-group';
-import slideTransition from '../../transition/slide.module.css';
+import slideTransition from '../../assert/transition/slide.module.css';
 
 export default class Phonebook extends Component {
   state = {
@@ -49,15 +49,16 @@ export default class Phonebook extends Component {
     if (foundContact) {
       toast.warn(`${contact.name} is already in contacts!`);
       return;
-    }
-    if (contact.name.length > 1 && contact.number.length > 1) {
+    } else if (contact.name.length <= 1 || !isNaN(contact.name)) {
+      toast.warn('Contact name is not correct!');
+      return;
+    } else if (contact.number.length <= 1 || isNaN(contact.number)) {
+      toast.warn('Contact number is not correct!');
+      return;
+    } else {
       this.setState(state => ({
-        contacts: [...oldContacts, savingContact],       
+        contacts: [...oldContacts, savingContact],
       }));
-    } else if (contact.name.length <= 1) {
-      toast.warn('Contact name is too small!');
-    } else if (contact.number.length <= 1) {
-      toast.warn('Contact number is too small!');
     }
   };
 
@@ -68,7 +69,7 @@ export default class Phonebook extends Component {
   };
 
   render() {
-    const { contacts, filter} = this.state;
+    const { contacts, filter } = this.state;
     const filteredContacts = filterContact(contacts, filter);
     return (
       <>
@@ -85,10 +86,12 @@ export default class Phonebook extends Component {
           <div>
             <h2 className={styles.text}>Contacts</h2>
             <ContactFilter value={filter} onChangeFilter={this.changeFilter} />
-            <ContactList
-              items={filteredContacts}
-              onDeleteContact={this.deleteContact}
-            />
+            {filteredContacts.length > 0 && (
+              <ContactList
+                items={filteredContacts}
+                onDeleteContact={this.deleteContact}
+              />
+            )}
           </div>
         </CSSTransition>
       </>

@@ -10,7 +10,7 @@ export default class ContactForm extends Component {
 
   state = {
     name: '',
-    number: '',
+    number: '', 
   };
 
   handleNameChange = e => {
@@ -30,13 +30,10 @@ export default class ContactForm extends Component {
     this.setState({ name: '', number: '' });
   };
 
-  render() {
-    const { name, number } = this.state;
-    let disabled;
-    name.length >= 1 && number.length >= 1
-      ? (disabled = false)
-      : (disabled = true);
 
+  render() {
+    const { name, number} = this.state;   
+    const disabled = name.length <= 0 || number.length <= 0;
     return (
       <form onSubmit={this.handleSubmit} className={styles.form}>
         <label htmlFor={this.id} className={styles.label}>
