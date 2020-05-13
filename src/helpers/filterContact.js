@@ -3,6 +3,4 @@ const filterContact = (contacts, filter) =>
     contact.name.toLowerCase().includes(filter.toLowerCase()),
   );
 
-
-
-  export default filterContact;
+export default filterContact;
