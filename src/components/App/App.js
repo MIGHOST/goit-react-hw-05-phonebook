@@ -1,6 +1,6 @@
 import React from 'react';
-import Phonebook from '../Phonebook/Phonebook';
+import PhBookContainer from '../../container/PhBookContainer';
 
-const App = () => <Phonebook />;
+const App = () => <PhBookContainer />;
 
 export default App;

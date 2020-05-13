@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Contact from '../Contacts/Contacts';
+import Contact from '../../container/ContactContainer';
 import styles from './ContactList.module.css';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import popTransition from '../../assert/transition/pop.module.css';
 
-const ContactList = ({ items, onDeleteContact }) => (
+const ContactList = ({ contacts }) => (
   <TransitionGroup className={styles.list} component="ul">
-    {items.map(item => (
+    {contacts.map(item => (
       <CSSTransition
         timeout={250}
         unmountOnExit
@@ -15,7 +15,7 @@ const ContactList = ({ items, onDeleteContact }) => (
         key={item.id}
       >
         <li className={styles.items}>
-          <Contact {...item} onDeleteContact={() => onDeleteContact(item.id)} />
+          <Contact {...item} />
         </li>
       </CSSTransition>
     ))}
@@ -23,12 +23,11 @@ const ContactList = ({ items, onDeleteContact }) => (
 );
 
 ContactList.propTypes = {
-  items: PropTypes.arrayOf(
+  contacts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
-  onDeleteContact: PropTypes.func.isRequired,
 };
 
 export default ContactList;
